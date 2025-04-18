@@ -76,8 +76,9 @@ export const addReaction = async (req, res) => {
 };
 export const removeReaction = async (req, res) => {
     try {
+        console.log("this is a delete reaction request");
         // Expecting reactionId to come in the request body
-        const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $pull: { reactions: { reactionId: req.body.reactionId } } }, { new: true });
+        const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $pull: { reactions: { reactionId: req.params.reactionId } } }, { new: true });
         if (!thought) {
             res.status(404).json({ message: 'No thought with that ID' });
             return;

@@ -23,6 +23,8 @@ router.route('/:id')
 
 router.route('/:thoughtId/reactions')
   .post(addReaction)
+
+router.route('/:thoughtId/reactions/:reactionId')
   .delete(removeReaction);
 
 export default router;

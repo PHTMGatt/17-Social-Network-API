@@ -87,10 +87,11 @@ export const addReaction = async (req: Request, res: Response): Promise<void> =>
 
 export const removeReaction = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log("this is a delete reaction request");
     // Expecting reactionId to come in the request body
     const thought = await Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $pull: { reactions: { reactionId: req.body.reactionId } } },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { new: true }
     );
     if (!thought) {

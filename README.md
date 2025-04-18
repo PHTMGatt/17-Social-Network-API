@@ -81,7 +81,7 @@ Once the server is running, use Insomnia (or another REST client) to test the AP
 
 ## Walkthrough Video
 
-📽️ Walkthrough Video: https://your-video-link-here.com
+📽️ Walkthrough Video: https://youtu.be/FxbeWo6EThA
 
 #### Notes
 
