@@ -19,8 +19,8 @@ This is a back-end API for a social network web application that allows users to
 ##### Installation
 
 1. Clone the repository:
-   git clone https://github.com/YOUR_USERNAME/social-network-api.git
-   cd social-network-api
+   git clone https://github.com/PHTMGatt/17-Social-Network-API.git
+   cd 17-Social-Network-API
 
 2. Install dependencies:
    npm install
