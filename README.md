@@ -1,5 +1,9 @@
 # Social Network API
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/PHTMGatt/12-React-Portfolio/a2c43d8301679dbda14ad06dc225d61e5515e431/src/assets/project-images/Social%20Network%20API.png" width="900" alt="Social Network API project artwork">
+</p>
+
 ## Description
 
 This is a back-end API for a social network web application that allows users to create accounts, share thoughts, react to other users' thoughts, and manage friend lists. It uses MongoDB as the database, Mongoose for object data modeling, and Express.js for routing. The API handles unstructured data efficiently and is tested using Insomnia.
