@@ -1,5 +1,9 @@
 # Social Network API
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/PHTMGatt/12-React-Portfolio/main/src/assets/photos/Social%20Network%20API.png" width="900" alt="Social Network API project artwork">
+</p>
+
 ## Description
 
 This is a back-end API for a social network web application that allows users to create accounts, share thoughts, react to other users' thoughts, and manage friend lists. It uses MongoDB as the database, Mongoose for object data modeling, and Express.js for routing. The API handles unstructured data efficiently and is tested using Insomnia.
@@ -15,8 +19,8 @@ This is a back-end API for a social network web application that allows users to
 ##### Installation
 
 1. Clone the repository:
-   git clone https://github.com/YOUR_USERNAME/social-network-api.git
-   cd social-network-api
+   git clone https://github.com/PHTMGatt/17-Social-Network-API.git
+   cd 17-Social-Network-API
 
 2. Install dependencies:
    npm install
