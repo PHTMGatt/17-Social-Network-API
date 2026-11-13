@@ -4,95 +4,64 @@
   <img src="https://raw.githubusercontent.com/PHTMGatt/12-React-Portfolio/main/src/assets/photos/Social%20Network%20API.png" width="900" alt="Social Network API project artwork">
 </p>
 
-## Description
+A REST API for a social network, written in TypeScript with Express, Mongoose and MongoDB: users, thoughts, reactions and friend lists.
 
-This is a back-end API for a social network web application that allows users to create accounts, share thoughts, react to other users' thoughts, and manage friend lists. It uses MongoDB as the database, Mongoose for object data modeling, and Express.js for routing. The API handles unstructured data efficiently and is tested using Insomnia.
+Walkthrough video: https://youtu.be/FxbeWo6EThA
 
-### Technologies Used
+## What it does
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- Insomnia (for API testing)
+- **Users:** create, read, update and delete users, each with a unique username and a validated email.
+- **Friends:** add and remove friends; a virtual `friendCount` is returned with each user.
+- **Thoughts:** post short thoughts (1 to 280 characters) that belong to a user; a virtual `reactionCount` is returned.
+- **Reactions:** add and remove reactions on a thought (stored as subdocuments).
+- **Cleanup:** deleting a user also deletes that user's thoughts.
 
-##### Installation
+## Tech stack
 
-1. Clone the repository:
-   git clone https://github.com/PHTMGatt/17-Social-Network-API.git
-   cd 17-Social-Network-API
+Node.js, Express 4, TypeScript, MongoDB with Mongoose 8. Tested by hand with Insomnia.
 
-2. Install dependencies:
-   npm install
+## Run it
 
-3. Make sure MongoDB is running locally on your machine:
-   mongod
+Needs Node.js and a MongoDB instance. By default it connects to `mongodb://127.0.0.1:27017/socialNetworkDB`.
 
-4. Start the application:
-   npm start
+Optional environment variables: `MONGODB_URI`, `PORT` (defaults to 3001).
 
-#### Usage
+```bash
+npm install
+npm start        # compiles with tsc, then runs dist/server.js
+npm run seed     # optional: wipes the database, then adds two users and one thought
+```
 
-Once the server is running, use Insomnia (or another REST client) to test the API endpoints.
+There is no automated test suite (`npm test` is a placeholder). The API is not deployed.
 
-#### User Routes
+## Endpoints
 
-- GET /api/users — Get all users
-- GET /api/users/:id — Get a single user (with thoughts and friends populated)
-- POST /api/users — Create a new user
-- PUT /api/users/:id — Update a user by ID
-- DELETE /api/users/:id — Delete a user and their associated thoughts
-- POST /api/users/:userId/friends/:friendId — Add a friend
-- DELETE /api/users/:userId/friends/:friendId — Remove a friend
+All routes are under `/api`.
 
-#### Thought Routes
+| Resource | Routes |
+|---|---|
+| Users | `GET /users`, `POST /users`, `GET /users/:id`, `PUT /users/:id`, `DELETE /users/:id` |
+| Friends | `POST /users/:userId/friends/:friendId`, `DELETE /users/:userId/friends/:friendId` |
+| Thoughts | `GET /thoughts`, `POST /thoughts`, `GET /thoughts/:id`, `PUT /thoughts/:id`, `DELETE /thoughts/:id` |
+| Reactions | `POST /thoughts/:thoughtId/reactions`, `DELETE /thoughts/:thoughtId/reactions/:reactionId` |
 
-- GET /api/thoughts — Get all thoughts
-- GET /api/thoughts/:id — Get a single thought
-- POST /api/thoughts — Create a new thought
-- PUT /api/thoughts/:id — Update a thought by ID
-- DELETE /api/thoughts/:id — Delete a thought
+Sample requests (JSON body):
 
-#### Reaction Routes
+```
+POST /api/users
+{ "username": "alice", "email": "alice@example.com" }
 
-- POST /api/thoughts/:thoughtId/reactions — Add a reaction to a thought
-- DELETE /api/thoughts/:thoughtId/reactions/:reactionId — Remove a reaction
+POST /api/thoughts
+{ "thoughtText": "Hello from Alice!", "username": "alice", "userId": "<alice's _id>" }
 
-##### Models
+POST /api/thoughts/<thoughtId>/reactions
+{ "reactionBody": "Nice one", "username": "bob" }
+```
 
-##### User
+Unknown IDs return a 404 with a message; other failures return a 500.
 
-- username (String, required, unique, trimmed)
-- email (String, required, unique, must match valid email)
-- thoughts (Array of ObjectId, references Thought)
-- friends (Array of ObjectId, self-reference User)
-- Virtual: friendCount — returns number of friends
+## What I learned / built
 
-##### Thought
-
-- thoughtText (String, 1–280 chars, required)
-- createdAt (Date, formatted with getter)
-- username (String, required)
-- reactions (Array of reaction subdocuments)
-- Virtual: reactionCount — returns number of reactions
-
-##### Reaction (Schema Only)
-
-- reactionId (ObjectId, auto-generated)
-- reactionBody (String, required, max 280 chars)
-- username (String, required)
-- createdAt (Date, formatted with getter)
-
-## Walkthrough Video
-
-📽️ Walkthrough Video: https://youtu.be/FxbeWo6EThA
-
-#### Notes
-
-- This API is not deployed and should be run locally.
-- No seed data is provided — use Insomnia to manually test all routes.
-- Deleting a user also deletes their associated thoughts (bonus functionality).
-
-### License
-
-© 2025 - For educational use only.
+- Modelling related data in MongoDB with Mongoose: references, a self-referencing friends list, subdocuments, virtuals and getters.
+- Structuring an Express and TypeScript API into models, controllers and routes.
+- Testing an API by hand with Insomnia. Automated route tests are the obvious next step.
