@@ -22,3 +22,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# compiled output (npm start and npm run seed rebuild it)
+/dist
