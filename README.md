@@ -8,6 +8,10 @@ A REST API for a social network, written in TypeScript with Express, Mongoose an
 
 Walkthrough video: https://youtu.be/FxbeWo6EThA
 
+## Status
+
+Coursework project. Checked 2026-11-26 on Windows with Node 26. `npm ci` and `npm run build` pass. The endpoints were **not** exercised: no MongoDB on the test machine. No automated tests.
+
 ## What it does
 
 - **Users:** create, read, update and delete users, each with a unique username and a validated email.
